@@ -14,7 +14,7 @@ class PosSession(models.Model):
         return {
             'search_params': {
                 'domain': [('date_start', '<=', today), ('date_end', '>=', today)],
-                'fields': ['name', 'date_start', 'date_end', 'amount', 'date_to'],
+                'fields': ['name', 'date_start', 'date_end', 'amount', 'date_end'],
             },
         }
 
