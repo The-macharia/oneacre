@@ -1,0 +1,29 @@
+version: '3.7'
+services:
+   db:
+        image: postgres:15
+        environment:
+                - POSTGRES_USER=odoo
+                - POSTGRES_PASSWORD=odoo
+                - POSTGRES_DB=postgres
+                - PGDATA=/var/lib/postgresql14/data/pgdata
+        ports:
+                - "51516:5432"
+        volumes:
+                - db-data:/var/lib/postgresql14/data/pgdata
+   odoo:
+        image: odoo:16.0
+        command: --dev=all
+        extra_hosts:
+                - "host.docker.internal:host-gateway"
+        ports:
+                - "8016:8069"
+        links:
+                - "db:db"
+        volumes:
+                - ./config:/etc/odoo:ro
+                - ./custom-addons:/mnt/extra-addons/custom-addons:ro
+                - odoo-data:/var/lib/odoo
+volumes:
+        odoo-data:
+        db-data:

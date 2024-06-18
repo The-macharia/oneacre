@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- product.promotion search view -->
+    <record id="product_promotion_view_search" model="ir.ui.view">
+        <field name="name">product.promotion.view.search</field>
+        <field name="model">product.promotion</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="date_start"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- product.promotion tree view -->
+    <record id="product_promotion_view_tree" model="ir.ui.view">
+        <field name="name">product.promotion.view.tree</field>
+        <field name="model">product.promotion</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- Add your fields here -->
+                <field name="name"/>
+                <field name="date_start"/>
+                <field name="date_end"/>
+                <field name="amount"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- product.promotion form view -->
+    <record id="product_promotion_view_form" model="ir.ui.view">
+        <field name="name">product.promotion.view.form</field>
+        <field name="model">product.promotion</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="date_start"/>
+                        </group>
+                        <group>
+                            <field name="amount"/>
+                            <field name="date_end"/>
+                            <field name="company_id" invisible="1"/>
+                        </group>
+                        <group string="Promotion Items" colspan="2">
+                            <field name="item_ids" nolabel="1" colspan="2">
+                                <tree editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="quantity"/>
+                                    <field name="price_unit"/>
+                                    <field name="promotion_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- product.promotion action window -->
+    <record id="product_promotion_action" model="ir.actions.act_window">
+        <field name="name">Promotions</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">product.promotion</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="product_promotion_menu_act" name="Promotions" parent="point_of_sale.pos_config_menu_catalog" action="product_promotion_action" sequence="30"/>
+</odoo>
